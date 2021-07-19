@@ -1,0 +1,5 @@
+client/node_modules
+client/.expo
+.expo
+.env
+node_modules/
