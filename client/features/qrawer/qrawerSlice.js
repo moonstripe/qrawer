@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchQrawers, addQrawer } from './qrawerAPI';
+import { fetchQrawers, addQrawer, addShelf } from './qrawerAPI';
 
 const initialState = {
   status: 'idle',
   qrawerName: '',
+  shelfName: ''
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -13,9 +14,20 @@ const initialState = {
 // typically used to make async requests.
 export const newQrawerAsync = createAsyncThunk(
   'qrawer/newQrawer',
-  async ({token, name}) => {
-      console.log('qrawer slice', name)
-    const response = await addQrawer({token, name});
+  async ({ token, name }) => {
+    console.log('qrawer slice', name)
+    const response = await addQrawer({ token, name });
+    // The value we return becomes the `fulfilled` action payload
+    // console.log('token?', response)z
+    return response;
+  }
+);
+
+export const newShelfAsync = createAsyncThunk(
+  'qrawer/newShelf',
+  async ({ token, shelfName, qrawerId }) => {
+    console.log('shelf slice', shelfName, qrawerId)
+    const response = await addShelf({ token, shelfName, qrawerId });
     // The value we return becomes the `fulfilled` action payload
     // console.log('token?', response)z
     return response;

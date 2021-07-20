@@ -39,3 +39,24 @@ export async function addQrawer({token, name}) {
   });
 }
 
+export async function addShelf({token, shelfName, qrawerId}) {
+
+  const config = {
+      method: 'POST',
+      url: 'http://localhost:3001/api/shelves/',
+      headers: {'authorization': token},
+      data: { 'name': shelfName, 'containedIn': qrawerId }
+  }
+
+
+console.log('sending qrawer with token', shelfName, 'to qrawer:', qrawerId)
+
+await axios(config)
+.then(function (response) {
+  console.log('received response:', response.data)
+})
+.catch(function (error) {
+  console.log(error);
+});
+}
+

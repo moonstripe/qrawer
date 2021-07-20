@@ -26,7 +26,7 @@ export const OrgNavList = ({ navigation }) => {
 
         getQrawers();
 
-    }, [qrawers])
+    }, [])
 
     const handleDelete = (id) => {
         console.log(id)
@@ -40,6 +40,7 @@ export const OrgNavList = ({ navigation }) => {
                 qrawers.map((q, i) => <List.Item
                     key={q["_id"]}
                     title={q["name"]}
+                    onPress={() => navigation.navigate("Single Qrawer", {qrawerId: q["_id"]})}
                     right={props => <Button {...props} icon="delete" onPress={(e) => handleDelete(q["_id"])}/>}
                 />)
             }

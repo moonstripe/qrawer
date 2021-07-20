@@ -14,9 +14,4 @@ router.route('/:qrawerId')
     .post(authMiddlewares.requireAuth, qrawerController.editQrawer)
     .delete(authMiddlewares.requireAuth, qrawerController.deleteQrawer);
 
-// router.route('/')
-//   .get(authMiddlewares.requireAuth, (req, res) => {
-//     console.log(req.user);
-//     res.send(req.user);
-//   });
 module.exports = router;

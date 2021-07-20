@@ -3,20 +3,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const ItemSchema = new Schema({
+const ShelfSchema = new Schema({
     name: {
         type: String,
         required: true
     },
     containedIn: {
         type: Schema.Types.ObjectId,
-        ref: 'Shelf',
+        ref: 'Qrawer',
         required: true
     }
 },
     { timestamps: true }
 );
 
-const Item = mongoose.model('Item', ItemSchema);
+const Shelf = mongoose.model('Shelf', ShelfSchema);
 
-module.exports = Item;
+module.exports = Shelf;

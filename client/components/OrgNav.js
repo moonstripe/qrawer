@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import { Text, ScrollView, View } from "react-native"
+import React, { useState } from "react";
+import { View } from "react-native"
 import { TextInput, Button } from 'react-native-paper'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectToken } from "../features/signin/authSlice";
-import { newQrawerAsync } from './../features/qrawer/qrawerSlice';
+import { newQrawerAsync, newShelfAsync } from './../features/qrawer/qrawerSlice';
 import { createStackNavigator } from '@react-navigation/stack';
 import { OrgNavList } from "./OrgNavList";
+import { OrgView } from "./OrgView";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +28,23 @@ const NewQrawer = ({ navigation }) => {
     )
 }
 
+const NewShelf = ({ navigation, route }) => {
+    const { qrawerId } = route.params;
+    const token = useSelector(selectToken)
+    const dispatch = useDispatch();
+    const [shelfName, setShelfName] = useState('');
+
+    return (
+        <View>
+            <TextInput onChangeText={(name) => setShelfName(name)} placeholder="shelf name"></TextInput>
+            <Button onPress={() => {
+                dispatch(newShelfAsync({token: token, shelfName, qrawerId}))
+                navigation.navigate("Qrawers")
+                }}>Add new Shelf</Button>
+        </View>
+    )
+}
+
 export const OrgNav = ({ navigation }) => {
 
     return (
@@ -39,6 +56,14 @@ export const OrgNav = ({ navigation }) => {
             <Stack.Screen
                 name="New Qrawer"
                 component={NewQrawer}
+            />
+            <Stack.Screen
+                name="Single Qrawer"
+                component={OrgView}
+            />
+            <Stack.Screen
+                name="New Shelf"
+                component={NewShelf}
             />
         </Stack.Navigator>
     )

@@ -45,15 +45,19 @@ module.exports = {
 
     findAllQrawers: async (req, res) => {
         console.log('findallproject', req.user)
-        await db.Qrawer.find({})
+        try {
+            await db.Qrawer.find({})
             .then((doc) => {
-                console.log(doc);
+                // console.log(doc);
                 res.json(doc);
             })
             .catch(e => {
                 console.log(e);
                 res.status(404).json({ e });
             });
+        } catch (e) {
+            console.log(e)
+        }
     },
     findOneQrawer: async (req, res) => {
         console.log('find 1 project');

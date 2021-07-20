@@ -12,9 +12,9 @@ const QrawerSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    items: [{
+    shelves: [{
         type: Schema.Types.ObjectId,
-        ref: 'Item'
+        ref: 'Shelf'
     }]
 },
     { timestamps: true }
