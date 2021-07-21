@@ -8,6 +8,12 @@ const ShelfSchema = new Schema({
         type: String,
         required: true
     },
+    items: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        }
+    ],
     containedIn: {
         type: Schema.Types.ObjectId,
         ref: 'Qrawer',

@@ -76,8 +76,12 @@ module.exports = {
         console.log('find 1 shelf');
         const { shelfId } = req.params;
 
+        console.log(shelfId)
+
         // find one mongo
         const foundShelf = await db.Shelf.findOne({ _id: shelfId })
+
+        console.log('sC 84', foundShelf)
 
         res.json(foundShelf)
 
@@ -91,6 +95,10 @@ module.exports = {
 
         const foundShelf = await db.Shelf.findOne({ _id: shelfId })
         // console.log('yesa?', foundShelf)
+
+        const deletedItems = await db.Item.deleteMany({ containedIn: shelfId })
+
+        console.log('deleted Items:', deletedItems)
 
         const deletedShelf = await db.Shelf.deleteOne({ _id: shelfId })
 

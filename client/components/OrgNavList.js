@@ -26,7 +26,7 @@ export const OrgNavList = ({ navigation }) => {
 
         getQrawers();
 
-    }, [])
+    }, [qrawers])
 
     const handleDelete = (id) => {
         console.log(id)

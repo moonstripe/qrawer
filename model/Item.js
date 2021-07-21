@@ -8,6 +8,9 @@ const ItemSchema = new Schema({
         type: String,
         required: true
     },
+    count: {
+        type: Number
+    },
     containedIn: {
         type: Schema.Types.ObjectId,
         ref: 'Shelf',

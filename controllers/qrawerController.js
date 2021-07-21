@@ -47,14 +47,14 @@ module.exports = {
         console.log('findallproject', req.user)
         try {
             await db.Qrawer.find({})
-            .then((doc) => {
-                // console.log(doc);
-                res.json(doc);
-            })
-            .catch(e => {
-                console.log(e);
-                res.status(404).json({ e });
-            });
+                .then((doc) => {
+                    // console.log(doc);
+                    res.json(doc);
+                })
+                .catch(e => {
+                    console.log(e);
+                    res.status(404).json({ e });
+                });
         } catch (e) {
             console.log(e)
         }
@@ -79,6 +79,19 @@ module.exports = {
     deleteQrawer: async (req, res) => {
 
         const { qrawerId } = req.params;
+
+        const foundShelves = await db.Shelf.find({ containedIn: qrawerId });
+        // find Shelves in Qrawer to delete
+        if (foundShelves) {
+            // delete contents of qrawer starting with Item
+            for (let i = 0; i < foundShelves.length; i++) {
+                const deletedItems = await db.Item.deleteMany({ containedIn: foundShelves[i]['_id'] })
+                console.log('deleted Items:', deletedItems)
+            }
+            const deletedShelf = await db.Shelf.deleteMany({ containedIn: qrawerId })
+            console.log('deleted Shelf:', deletedShelf)
+
+        }
 
         console.log(qrawerId);
         const deletedQrawer = await db.Qrawer.deleteOne({ _id: qrawerId })

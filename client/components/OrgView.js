@@ -36,7 +36,7 @@ export const OrgView = ({ navigation, route }) => {
                 })
                 // console.log('gsfq:', res.data);
                 setShelves(res.data)
-                console.log('got shelves from qrawer')
+                console.log('got shelves from qrawer', res.data)
 
             } catch (e) {
                 console.log('get shelves', e)
@@ -53,7 +53,7 @@ export const OrgView = ({ navigation, route }) => {
 
     const handleDelete = (id) => {
         console.log(id)
-        return axios.delete(`http://localhost:3001/api/shelves/${id}`, { headers: { 'authorization': token } })
+        return axios.delete(`http://localhost:3001/api/shelves/s/${id}`, { headers: { 'authorization': token } })
     }
 
     return (
@@ -66,6 +66,7 @@ export const OrgView = ({ navigation, route }) => {
                     <List.Item
                         key={i}
                         title={q['name']}
+                        onPress={() => navigation.navigate("Single Shelf", { shelfId: q["_id"] })}
                         right={props => <Button {...props} icon="delete" onPress={(e) => handleDelete(q["_id"])} />}
                     />
                 ))}

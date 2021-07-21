@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchQrawers, addQrawer, addShelf } from './qrawerAPI';
+import { fetchQrawers, addQrawer, addShelf, addItem } from './qrawerAPI';
 
 const initialState = {
   status: 'idle',
@@ -30,6 +30,17 @@ export const newShelfAsync = createAsyncThunk(
     const response = await addShelf({ token, shelfName, qrawerId });
     // The value we return becomes the `fulfilled` action payload
     // console.log('token?', response)z
+    return response;
+  }
+);
+
+export const newItemAsync = createAsyncThunk(
+  'qrawer/newItem',
+  async ({ token, itemName, itemCount, shelfId }) => {
+    console.log('item slice', token, itemName, itemCount, shelfId)
+    const response = await addItem({ token, itemName, itemCount, shelfId });
+    // The value we return becomes the `fulfilled` action payload
+    // console.log('token?', response)
     return response;
   }
 );

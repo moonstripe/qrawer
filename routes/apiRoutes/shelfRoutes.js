@@ -11,7 +11,7 @@ router.route('/')
 router.route('/:qrawerId')
     .get(authMiddlewares.requireAuth, shelfController.findAllShelvesByQrawer);
 
-router.route('/:shelfId')
+router.route('/s/:shelfId')
     .get(authMiddlewares.requireAuth, shelfController.findOneShelf)
     .post(authMiddlewares.requireAuth, shelfController.editShelf)
     .delete(authMiddlewares.requireAuth, shelfController.deleteShelf);
